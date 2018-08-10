@@ -1,5 +1,7 @@
 # streamy
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/moimikey/streamy.svg)](https://greenkeeper.io/)
+
 Playing with worker threads to chunk a list of passwords for cracking in multiple threads.
 
 ## Usage
