@@ -2,6 +2,7 @@ const fs = require('fs')
 const {
   Worker, isMainThread, parentPort, workerData
 } = require('worker_threads')
+const request = require('request')
 const split = require('binary-split')
 const meow = require('meow')
 
@@ -52,7 +53,7 @@ if (isMainThread) {
         thread: i
       }})
       worker.on('message', (msg) => {
-        console.log("working on: ", msg)
+        console.log('working on:', msg)
       })
       worker.on('error', console.error)
       worker.on('exit', (code) => {
@@ -86,9 +87,21 @@ if (isMainThread) {
     })
 } else {
   const { chunks, thread } = workerData
-  console.log('thread', thread)
-  chunks.forEach(a => {
-    parentPort.postMessage(ab2str(a))
+  console.log('starting thread', thread)
+  chunks.forEach(chunk => {
+    // request.get('http://www.google.com/?' + ab2str(chunk), (err, resp) => {
+    //   if(err) {
+    //     return console.error(err);
+    //   }
+    //   parentPort.postMessage({
+    //     thread,
+    //     chunk: ab2str(chunk)
+    //   })
+    // })
+    parentPort.postMessage({
+      thread,
+      chunk: ab2str(chunk)
+    })
   })
 }
 
