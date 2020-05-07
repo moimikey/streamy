@@ -11,7 +11,7 @@
   "license": "MIT",
   "dependencies": {
     "binary-split": "^1.0.3",
-    "meow": "^5.0.0",
+    "meow": "^7.0.0",
     "request": "^2.88.0"
   }
 }
